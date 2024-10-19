@@ -30,13 +30,6 @@ jobs:
           username: rararana
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
-
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v3
@@ -49,8 +42,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            neosmemo/memos
-            ghcr.io/usememos/memos
+            rararana/memos-for-old
           tags: |
             type=semver,pattern={{version}},value=${{ env.VERSION }}
             type=semver,pattern={{major}}.{{minor}},value=${{ env.VERSION }}
